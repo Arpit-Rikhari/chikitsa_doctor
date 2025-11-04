@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hospital_management/views/patient_records_by_phone.dart';
 import 'package:provider/provider.dart';
 import 'package:hospital_management/models/patient.dart';
 import 'package:hospital_management/viewmodels/patient_viewmodel.dart';
@@ -73,7 +74,10 @@ class _HomePageState extends State<HomePage> {
             );
           },
           icon: const Icon(Icons.add, color: Colors.white),
-          label: const Text('Add Patient', style: TextStyle(color: Colors.white)),
+          label: const Text(
+            'Add Patient',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
@@ -114,8 +118,11 @@ class _HomePageState extends State<HomePage> {
 
                 final patients = snapshot.data ?? [];
                 final filtered = patients
-                    .where((p) =>
-                        p.name.toLowerCase().contains(searchQuery.toLowerCase()))
+                    .where(
+                      (p) => p.name.toLowerCase().contains(
+                        searchQuery.toLowerCase(),
+                      ),
+                    )
                     .toList();
 
                 if (filtered.isEmpty) {
@@ -123,8 +130,11 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset('image/empty-list.svg',
-                            height: 200, semanticsLabel: 'no data'),
+                        SvgPicture.asset(
+                          'image/empty-list.svg',
+                          height: 200,
+                          semanticsLabel: 'no data',
+                        ),
                         const SizedBox(height: 20),
                         const Text(
                           'No patients found 🩹',
@@ -151,7 +161,9 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         leading: CircleAvatar(
                           radius: 25,
                           backgroundColor: Colors.teal.shade100,
@@ -209,9 +221,12 @@ class _HomePageState extends State<HomePage> {
                                 children: const [
                                   Icon(Icons.edit, color: Colors.teal),
                                   SizedBox(width: 10),
-                                  Text('Edit',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500)),
+                                  Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -225,14 +240,26 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Delete',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.redAccent),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.redAccent,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ],
                         ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PatientRecordsByPhonePage(
+                                phone: p.phone,
+                                name: p.name,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
@@ -251,8 +278,7 @@ class _HomePageState extends State<HomePage> {
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: const Text('🗑 Delete Patient'),
-        content:
-            const Text('This will permanently remove the patient record.'),
+        content: const Text('This will permanently remove the patient record.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -262,14 +288,14 @@ class _HomePageState extends State<HomePage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () async {
               Navigator.pop(context);
               await vm.deletePatient(id);
             },
-            child:
-                const Text('Delete', style: TextStyle(color: Colors.white)),
+            child: const Text('Delete', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
