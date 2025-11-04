@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:hospital_management/models/patient.dart';
 import 'package:hospital_management/viewmodels/patient_viewmodel.dart';
+import 'package:intl/intl.dart';
 
 class PatientRecordsByPhonePage extends StatefulWidget {
   final String phone;
@@ -140,7 +141,7 @@ class _PatientRecordsByPhonePageState extends State<PatientRecordsByPhonePage> {
                           subtitle: Padding(
                             padding: const EdgeInsets.only(top: 5),
                             child: Text(
-                              '🧍‍♂️ Age: ${p.age}\n💬 Problem: ${p.mainComplaint}\n📞 Phone: ${p.phone}\n📝 Note: ${p.notes}\n🗓️ Date: ${p.createdAt}',
+                              '🧍‍♂️ Age: ${p.age}\n💬 Problem: ${p.mainComplaint}\n📞 Phone: ${p.phone}\n📝 Note: ${p.notes}\n🗓️ Date: ${DateFormat('dd MMM yyyy, hh:mm a').format(p.createdAt.toDate())}',
                               style: const TextStyle(height: 1.4),
                             ),
                           ),
