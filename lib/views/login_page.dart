@@ -23,7 +23,6 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // 🩺 Replace Lottie with your own GIF
                   SizedBox(
                     height: 300,
                     child: Image.asset(
