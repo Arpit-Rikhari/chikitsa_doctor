@@ -23,10 +23,21 @@ class PatientRecordsByPhonePage extends StatefulWidget {
 class _PatientRecordsByPhonePageState extends State<PatientRecordsByPhonePage> {
   String searchQuery = '';
 
-  @override
-  Widget build(BuildContext context) {
-    final patientVm = context.read<PatientViewModel>();
+ @override
+Widget build(BuildContext context) {
+  final patientVm = context.read<PatientViewModel>();
 
+  if (widget.phone.isEmpty) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          '❌ No phone number provided in the URL',
+          style: TextStyle(fontSize: 18, color: Colors.red),
+        ),
+      ),
+    );
+  }
+  
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FB),
       appBar: AppBar(
