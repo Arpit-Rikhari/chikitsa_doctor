@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          'image/empty-list.svg',
+                          'assets/image/empty-list.svg',
                           height: 200,
                           semanticsLabel: 'no data',
                         ),
